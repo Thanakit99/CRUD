@@ -12,29 +12,32 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* ตรวจสอบและปรับค่าสีอัตโนมัติเมื่อผู้ใช้เปิดโหมดมืด (Dark Mode) บนระบบ */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0a0a0a; /* กำหนดตัวแปรสีพื้นหลังเป็นโทนดำเข้มเกือบสนิท */
+    --foreground: #ededed; /* กำหนดตัวแปรสีข้อความให้เป็นสีขาวสว่างเพื่อให้อ่านง่าย */
   }
 }
 
+/* ตั้งค่าสไตล์พื้นฐานของหน้าเว็บไซต์ทั้งหมด */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background); /* ดึงค่าสีพื้นหลังมาจากตัวแปรกลางใน :root */
+  color: var(--foreground);       /* ดึงค่าสีข้อความมาจากตัวแปรกลางใน :root */
+  font-family: Arial, Helvetica, sans-serif; /* กำหนดชุดฟอนต์มาตรฐานให้อ่านสะอาดตา */
 }
+/* สไตล์สำหรับการ์ดแสดงข้อมูลวงดนตรี */
 .band-card {
-  background-color: #111827;
-  border: 1px solid #1f2937;
-  border-radius: 1rem;
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  background-color: #111827; /* กำหนดสีพื้นหลังของการ์ดเป็นสีเทาเข้มอมฟ้าสไตล์ Tailwind */
+  border: 1px solid #1f2937;  /* เพิ่มเส้นขอบบางๆ ให้การ์ดดูมีมิติแยกจากพื้นหลัง */
+  border-radius: 1rem;        /* ทำให้มุมขอบของการ์ดมีความโค้งมนสวยงามทันสมัย */
+  padding: 1.5rem;            /* กำหนดพื้นที่ว่างภายใน (Padding) รอบๆ เนื้อหาของการ์ด */
+  display: flex;              /* เปิดใช้งานระบบ Flexbox สำหรับจัดระเบียบองค์ประกอบ */
+  flex-direction: column;     /* กำหนดทิศทางการเรียงเนื้อหาภายในให้อยู่ในแนวตั้ง */
+  transition: transform 0.2s ease, border-color 0.2s ease; /* กำหนดความนุ่มนวลเวลาเปลี่ยนสถานะ */
 }
-
+/* ลูกเล่น */
 .band-card:hover {
-  border-color: #3b82f6;
-  transform: translateY(-4px);
+  border-color: #3b82f6;      /* เปลี่ยนสีเส้นขอบการ์ดให้กลายเป็นสีฟ้าสดใส */
+  transform: translateY(-4px); /* ดึงการ์ดให้ขยับลอยขึ้นด้านบนเล็กน้อย 4 พิกเซลเพื่อความมีชีวิตชีวา */
 }
