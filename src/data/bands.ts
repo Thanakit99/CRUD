@@ -1,6 +1,6 @@
-import { Band } from "@/Type/band"; // นำเข้า type Band จากไฟล์ band.ts
+import { Band } from "@/types/band";
 
-export const bands: Band[] = [ // ประกาศตัวแปร bands เป็น array ของ type Band
+export const bands: Band[] = [
   {
     id: 1,
     name: "COCKTAIL",
@@ -24,10 +24,9 @@ export const bands: Band[] = [ // ประกาศตัวแปร bands เ
     members: [
       { name: "เจ๋ง เดชา โคนาโล", image: "/image/Band/Jba.jpg", role: "Vocals" },
       { name: "อ๊อฟ พูนศักดิ์ จตุระบุล", image: "/image/Band/Aba.jpg", role: "Lead Guitar" },
-      { name: "หมู อภิชาติ พรมรักษา", image: "/image/Band/Mba.jpg", role: " Guitar" },
+      { name: "หมู อภิชาติ พรมรักษา", image: "/image/Band/Mba.jpg", role: "Guitar" },
       { name: "โอ๊ค พงศพัศ ศรีพันธบุตร", image: "/image/Band/Oba.webp", role: "Guitar" },
       { name: "กบ ขจรเดช พรมรักษา", image: "/image/Band/Ggba.webp", role: "Bass" },
-      
     ],
     description: "วงร็อกรุ่นใหญ่เจ้าของเพลงฮิตหนักแน่นและทรงพลัง",
   },
@@ -39,7 +38,7 @@ export const bands: Band[] = [ // ประกาศตัวแปร bands เ
     image: "/image/Band/onlymonday.jpg",
     members: [
       { name: "ธีร์ ทีปกร คำสุรีย์", image: "/image/Band/Tom.webp", role: "Vocals & Guitar" },
-      { name: "โปรด วริศ สาระเขตต์ ", image: "/image/Band/pom.jpg", role: "Bass" },
+      { name: "โปรด วริศ สาระเขตต์", image: "/image/Band/pom.jpg", role: "Bass" },
       { name: "เฟรม คฑาวุธ ขำทอง", image: "/image/Band/fom.webp", role: "Drums" },
     ],
     description: "วงร็อกรุ่นใหม่ไฟแรงกับซาวด์ดนตรีที่เข้มข้นและเข้าถึงอารมณ์",
