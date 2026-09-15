@@ -1,11 +1,21 @@
 import Image from "next/image"; // นำเข้าคอมโพเนนต์ Image จาก Next.js สำหรับจัดการและoptimizeรูปภาพ
-import type { Band } from "@/Type/band"; // นำเข้า TypeScript Type ของข้อมูลวงดนตรี
+import type { Band } from "@/types/band"; // นำเข้า TypeScript Type ของข้อมูลวงดนตรี (แนะนำใช้ types ตัวพิมพ์เล็ก)
 
 type BandCardProps = {
-  band: Band; // กำหนดให้ props ของคอมโพเนนต์นี้ต้องรับข้อมูลวงดนตรี (band) 1 วง
+  band: Band; // ข้อมูลวงดนตรี
+  isFollowed: boolean; // สถานะว่ากำลังติดตามวงนี้หรือไม่
+  onToggleFollow: (id: number) => void; // ฟังก์ชันสลับสถานะติดตาม ( Callback Props)
+  likes: number; // จำนวน Like ของวงนี้
+  onLike: (id: number) => void; // ฟังก์ชันเพิ่ม Like ( Callback Props)
 };
 
-export default function BandCard({ band }: BandCardProps) {
+export default function BandCard({
+  band,
+  isFollowed,
+  onToggleFollow,
+  likes,
+  onLike,
+}: BandCardProps) {
   return (
     <article className="band-card"> {/* กล่องการ์ดหลักสำหรับครอบเนื้อหาทั้งหมด */}
       {/* ส่วนของรูปวง */}
@@ -36,6 +46,51 @@ export default function BandCard({ band }: BandCardProps) {
           {band.description} {/* แสดงคำอธิบายวง (ถ้ามี) */}
         </p>
       )}
+
+      {/* ==================== [ส่วนที่เพิ่มใหม่]: ปุ่ม Like และปุ่มติดตาม ==================== */}
+      <div style={{ display: "flex", gap: "0.5rem", marginBottom: "1rem" }}>
+        {/* ปุ่ม Like */}
+        <button
+          type="button"
+          onClick={() => onLike(band.id)}
+          style={{
+            flex: 1,
+            background: "#374151",
+            color: "#fff",
+            border: "1px solid #4b5563",
+            padding: "0.5rem 1rem",
+            borderRadius: "6px",
+            cursor: "pointer",
+            fontSize: "0.875rem",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "0.35rem"
+          }}
+        >
+          ❤️ Like ({likes})
+        </button>
+
+        {/* ปุ่มติดตาม / เลิกติดตาม */}
+        <button
+          type="button"
+          aria-pressed={isFollowed}
+          onClick={() => onToggleFollow(band.id)}
+          style={{
+            flex: 1,
+            background: isFollowed ? "#2563eb" : "#1f2937",
+            color: isFollowed ? "#fff" : "#9ca3af",
+            border: isFollowed ? "1px solid #3b82f6" : "1px solid #4b5563",
+            padding: "0.5rem 1rem",
+            borderRadius: "6px",
+            cursor: "pointer",
+            fontSize: "0.875rem",
+            fontWeight: "500"
+          }}
+        >
+          {isFollowed ? "✓ กำลังติดตาม" : "+ ติดตาม"}
+        </button>
+      </div>
 
       {/* ส่วนแสดงรายชื่อสมาชิก */}
       <div style={{ borderTop: "1px solid #374151", paddingTop: "1rem", marginTop: "auto" }}>
