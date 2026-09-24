@@ -3,7 +3,8 @@ export type GameStatus = 'ยังไม่เริ่ม' | 'กำลัง�
 export interface Game {
   id: string;
   name: string;      
-  platform: string;     
+  platform: string;    
   expectedHours: number; 
   status: GameStatus;   
+  imageUrl?: string;
 }

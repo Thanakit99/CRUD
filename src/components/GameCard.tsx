@@ -23,6 +23,17 @@ export default function GameCard({ game, onEdit, onDelete }: GameCardProps) {
   return (
     <div className="bg-[#181b22] border border-gray-800 rounded-xl p-5 shadow-lg hover:border-gray-700 transition-all flex flex-col justify-between">
       <div>
+        {/* ส่วนแสดงรูปภาพเกม */}
+        {game.imageUrl && (
+          <div className="relative h-44 w-full overflow-hidden rounded-lg mb-4 bg-gray-900 border border-gray-800">
+            <img
+              src={game.imageUrl}
+              alt={game.name}
+              className="h-full w-full object-cover"
+            />
+          </div>
+        )}
+
         <div className="flex justify-between items-start gap-2 mb-3">
           <h3 className="text-lg font-semibold text-white">{game.name}</h3>
           <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${getStatusBadgeClass(game.status)}`}>

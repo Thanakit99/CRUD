@@ -14,6 +14,7 @@ export default function GameForm({ initialData, onSubmit, onCancel }: GameFormPr
   const [platform, setPlatform] = useState('');
   const [expectedHours, setExpectedHours] = useState<number | ''>('');
   const [status, setStatus] = useState<GameStatus>('ยังไม่เริ่ม');
+  const [imageUrl, setImageUrl] = useState(''); // เพิ่ม State สำหรับเก็บลิงก์รูปภาพ
 
   useEffect(() => {
     if (initialData) {
@@ -21,11 +22,13 @@ export default function GameForm({ initialData, onSubmit, onCancel }: GameFormPr
       setPlatform(initialData.platform);
       setExpectedHours(initialData.expectedHours);
       setStatus(initialData.status);
+      setImageUrl(initialData.imageUrl || ''); // โหลดค่ารูปภาพเดิมถ้ามี
     } else {
       setName('');
       setPlatform('');
       setExpectedHours('');
       setStatus('ยังไม่เริ่ม');
+      setImageUrl('');
     }
   }, [initialData]);
 
@@ -38,6 +41,7 @@ export default function GameForm({ initialData, onSubmit, onCancel }: GameFormPr
       platform,
       expectedHours: Number(expectedHours),
       status,
+      imageUrl, // ส่งข้อมูลรูปภาพกลับไปด้วย
     });
   };
 
@@ -68,6 +72,17 @@ export default function GameForm({ initialData, onSubmit, onCancel }: GameFormPr
           required
           className="w-full bg-[#12141a] px-3 py-2 text-white border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"
           placeholder="เช่น PC, PS5, Nintendo Switch"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-300 mb-1">ลิงก์รูปภาพ (Image URL)</label>
+        <input
+          type="text"
+          value={imageUrl}
+          onChange={(e) => setImageUrl(e.target.value)}
+          className="w-full bg-[#12141a] px-3 py-2 text-white border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"
+          placeholder="https://example.com/image.jpg"
         />
       </div>
 
