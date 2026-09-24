@@ -1,4 +1,3 @@
-// navbar home/courses/about
 import Link from "next/link";
 
 export default function Navbar() {
@@ -13,6 +12,11 @@ export default function Navbar() {
                 <li>
                     <Link className="navLink hover:text-blue-500 transition-colors" href="/courses">
                         รายวิชา
+                    </Link>
+                </li>
+                <li>
+                    <Link className="navLink hover:text-blue-500 transition-colors" href="/games">
+                        รายการเกม
                     </Link>
                 </li>
                 <li>

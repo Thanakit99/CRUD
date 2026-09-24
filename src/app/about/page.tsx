@@ -3,7 +3,7 @@ export default function AboutPage() {
   const description = "แพลตฟอร์มค้นหาและติดตามรายวิชาสำหรับนักศึกษา";
 
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-200 p-6 md:p-10 max-w-7xl mx-auto">
+    <div className="min-h-screen bg-950 text-gray-200 p-6 md:p-10 max-w-7xl mx-auto">
       {/* ส่วนหัวของหน้า About */}
       <header className="mb-12 bg-gray-900 border border-gray-800 rounded-2xl p-8 shadow-lg">
         <h1 className="text-4xl font-bold text-gray-50 tracking-tight mb-3">เกี่ยวกับเรา</h1>
