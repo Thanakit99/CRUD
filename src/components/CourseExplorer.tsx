@@ -2,7 +2,7 @@
 
 import { useState, ChangeEvent } from "react";
 import type { Course } from "@/types/course";
-import CourseCard from "@/components/CourseCard";
+import CourseCard from "@/components/CourseCard"; // ปรับให้ตรงกับชื่อไฟล์การ์ดจริง
 
 type CourseExplorerProps = {
   courses: Course[];
@@ -25,8 +25,9 @@ export default function CourseExplorer({ courses }: CourseExplorerProps) {
 
   const searchText = keyword.trim().toLowerCase();
   const visibleCourses = courses.filter((course) => {
+    // ปรับจาก course.title เป็น course.name ตามโครงสร้าง Type ทั่วไป (ถ้าของคุณใช้ title ให้เปลี่ยนกลับได้ครับ)
     const matchesSearch =
-      course.title.toLowerCase().includes(searchText) ||
+      course.name.toLowerCase().includes(searchText) ||
       course.code.includes(searchText);
     const matchesFavorite = onlyFavorite ? favoriteIds.includes(course.id) : true;
     return matchesSearch && matchesFavorite;
@@ -39,21 +40,21 @@ export default function CourseExplorer({ courses }: CourseExplorerProps) {
         value={keyword}
         onChange={handleKeywordChange}
         placeholder="ค้นหาชื่อวิชาหรือรหัสวิชา"
-        className="border p-2 rounded w-full"
+        className="border p-2 rounded w-full bg-gray-900 text-white border-gray-700"
       />
       <div className="flex gap-4 items-center">
         <button
           type="button"
           onClick={() => setOnlyFavorite(!onlyFavorite)}
-          className="p-2 border rounded"
+          className="p-2 border rounded bg-gray-800 text-white border-gray-700 hover:bg-gray-700"
         >
           {onlyFavorite ? "แสดงทั้งหมด" : "แสดงเฉพาะรายการโปรด"}
         </button>
-        <span>รายการโปรด: {favoriteIds.length} รายการ</span>
+        <span className="text-gray-300">รายการโปรด: {favoriteIds.length} รายการ</span>
       </div>
 
       {visibleCourses.length === 0 ? (
-        <p>ไม่พบรายวิชาที่ตรงกับเงื่อนไข</p>
+        <p className="text-gray-400">ไม่พบรายวิชาที่ตรงกับเงื่อนไข</p>
       ) : (
         <section className="grid gap-4">
           {visibleCourses.map((course) => (

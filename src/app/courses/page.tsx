@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, ChangeEvent } from "react";
+import CourseCard from "@/components/CourseCard";
 
 type Course = {
   id: number;
@@ -11,34 +12,10 @@ type Course = {
 };
 
 const COURSES_DATA: Course[] = [
-  {
-    id: 1,
-    code: "10301231",
-    title: "Web Technology",
-    credits: 3,
-    isOpen: true,
-  },
-  {
-    id: 2,
-    code: "10301232",
-    title: "Network",
-    credits: 3,
-    isOpen: true,
-  },
-  {
-    id: 3,
-    code: "10301233",
-    title: "Database Systems",
-    credits: 3,
-    isOpen: false,
-  },
-  {
-    id: 4,
-    code: "10301234",
-    title: "Structure Relational Database",
-    credits: 3,
-    isOpen: true,
-  },
+  { id: 1, code: "10301231", title: "Web Technology", credits: 3, isOpen: true },
+  { id: 2, code: "10301232", title: "Network", credits: 3, isOpen: true },
+  { id: 3, code: "10301233", title: "Database Systems", credits: 3, isOpen: false },
+  { id: 4, code: "10301234", title: "Structure Relational Database", credits: 3, isOpen: true },
 ];
 
 export default function CoursesPage() {
@@ -66,91 +43,71 @@ export default function CoursesPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-200 p-6 md:p-10">
-      <header className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-50 tracking-tight mb-3">
+    <div style={{ padding: "2rem", maxWidth: "1200px", margin: "0 auto", color: "#fff" }}>
+      <header style={{ marginBottom: "2rem" }}>
+        <h1 style={{ fontSize: "2rem", fontWeight: "bold", marginBottom: "0.5rem" }}>
           รายวิชาทั้งหมด
         </h1>
-        <p className="text-xl text-gray-300">
+        <p style={{ color: "#9ca3af" }}>
           ตรวจสอบรายชื่อวิชาและสถานะการเปิดลงทะเบียน
         </p>
       </header>
 
-      <div className="flex flex-col sm:flex-row gap-4 mb-8 items-stretch sm:items-center">
+      <div style={{ display: "flex", flexDirection: "row", gap: "1rem", marginBottom: "2rem", alignItems: "center", flexWrap: "wrap" }}>
         <input
           type="search"
           value={keyword}
           onChange={handleKeywordChange}
           placeholder="ค้นหาชื่อวิชาหรือรหัสวิชา..."
-          className="flex-1 bg-gray-800 border border-gray-700 text-gray-100 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500"
+          style={{
+            flex: 1,
+            minWidth: "260px",
+            background: "#1f2937",
+            border: "1px solid #374151",
+            color: "#fff",
+            borderRadius: "8px",
+            padding: "0.5rem 1rem",
+            outline: "none"
+          }}
         />
 
         <button
           type="button"
           onClick={() => setOnlyFavorite(!onlyFavorite)}
-          className={`px-5 py-2.5 rounded-xl border transition-colors text-sm font-medium whitespace-nowrap ${
-            onlyFavorite
-              ? "bg-blue-600 border-blue-500 text-white"
-              : "bg-gray-800 border-gray-700 text-gray-300 hover:bg-gray-700"
-          }`}
+          style={{
+            background: onlyFavorite ? "#2563eb" : "#1f2937",
+            color: onlyFavorite ? "#fff" : "#9ca3af",
+            border: onlyFavorite ? "1px solid #3b82f6" : "1px solid #374151",
+            padding: "0.5rem 1rem",
+            borderRadius: "6px",
+            cursor: "pointer",
+            fontSize: "0.875rem",
+            fontWeight: "500",
+            whiteSpace: "nowrap"
+          }}
         >
           {onlyFavorite ? "แสดงทั้งหมด" : "แสดงเฉพาะรายการโปรด"}
         </button>
 
-        <div className="text-sm text-gray-400 self-center whitespace-nowrap">
-          รายการโปรด: <strong className="text-blue-400">{favoriteIds.length}</strong> วิชา
+        <div style={{ fontSize: "0.9rem", color: "#9ca3af", whiteSpace: "nowrap" }}>
+          รายการโปรด: <strong style={{ color: "#60a5fa" }}>{favoriteIds.length}</strong> วิชา
         </div>
       </div>
 
       {visibleCourses.length === 0 ? (
-        <div className="text-center py-12 text-gray-400">
+        <div style={{ textAlign: "center", padding: "3rem 0", color: "#9ca3af" }}>
           ไม่พบรายวิชาที่ตรงกับเงื่อนไข
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {visibleCourses.map((course) => {
-            const isFav = favoriteIds.includes(course.id);
-            return (
-              <article
-                key={course.id}
-                className="bg-gray-800 border border-gray-700 rounded-2xl p-7 shadow-lg hover:border-blue-700 hover:shadow-blue-900/30 transition-all duration-300 flex flex-col justify-between space-y-6"
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <h2 className="text-xl font-bold text-gray-50 leading-tight flex-1">
-                    {course.title}
-                  </h2>
-                  <span className="text-xs font-medium px-3 py-1.5 bg-blue-900 text-blue-300 rounded-full whitespace-nowrap">
-                    {course.code}
-                  </span>
-                </div>
-
-                <div className="pt-6 border-t border-gray-700 flex items-center justify-between text-sm">
-                  <span className="text-gray-400">{course.credits} หน่วยกิต</span>
-                  <span
-                    className={`px-4 py-1.5 rounded-full text-xs font-semibold ${
-                      course.isOpen
-                        ? "bg-green-900 text-green-300"
-                        : "bg-red-900 text-red-300"
-                    }`}
-                  >
-                    {course.isOpen ? "เปิดลงทะเบียน" : "ปิดลงทะเบียน"}
-                  </span>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => handleToggleFavorite(course.id)}
-                  className={`w-full py-2.5 px-4 rounded-xl text-sm font-medium transition-colors ${
-                    isFav
-                      ? "bg-amber-600/20 border border-amber-500/50 text-amber-300 hover:bg-amber-600/30"
-                      : "bg-gray-700/50 border border-gray-600 text-gray-300 hover:bg-gray-700"
-                  }`}
-                >
-                  {isFav ? "★ อยู่ในรายการโปรด" : "☆ เพิ่มเป็นรายการโปรด"}
-                </button>
-              </article>
-            );
-          })}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: "1.5rem" }}>
+          {visibleCourses.map((course) => (
+            <CourseCard
+              key={course.id}
+              course={course}
+              isFavorite={favoriteIds.includes(course.id)}
+              onToggleFavorite={handleToggleFavorite}
+            />
+          ))}
         </div>
       )}
     </div>

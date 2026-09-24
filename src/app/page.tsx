@@ -50,20 +50,19 @@ export default function HomePage() {
   const isSystemOpen = true;
 
   return (
-    // เปลี่ยนสีพื้นหลังของหน้า
-    <div className="min-h-screen bg-gray-900 text-gray-200 p-6 md:p-10">
+    <div className="min-h-screen bg-gray-950 text-gray-200 p-6 md:p-10 max-w-7xl mx-auto">
       {/* ส่วนหัวของเว็บไซต์ */}
-      <header className="mb-12">
+      <header className="mb-12 bg-gray-900 border border-gray-800 rounded-2xl p-8 shadow-lg">
         <h1 className="text-4xl font-bold text-gray-50 tracking-tight mb-3">{siteName}</h1>
         <p className="text-xl text-gray-300 max-w-3xl mb-6">{description}</p>
-        <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-400 bg-gray-800/50 p-4 rounded-lg max-w-max">
-          <span>จำนวนรายวิชาทั้งหมด: <span className='text-gray-100 font-semibold'>{COURSES_DATA.length}</span> วิชา</span>
-          <span className='hidden md:inline'>•</span>
-          <span>
+        <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-300 bg-gray-800/60 p-4 rounded-xl max-w-max border border-gray-700">
+          <span>จำนวนรายวิชาทั้งหมด: <strong className="text-blue-400">{COURSES_DATA.length}</strong> วิชา</span>
+          <span className="hidden md:inline text-gray-600">•</span>
+          <span className="flex items-center gap-2">
             สถานะระบบ:{" "}
             <span
-              className={`font-semibold px-2 py-0.5 rounded-full ${
-                isSystemOpen ? "bg-green-900 text-green-300" : "bg-red-900 text-red-300"
+              className={`font-semibold px-3 py-0.5 rounded-full text-xs ${
+                isSystemOpen ? "bg-green-950 text-green-300 border border-green-800" : "bg-red-950 text-red-300 border border-red-800"
               }`}
             >
               {isSystemOpen ? "เปิดใช้งาน" : "ปิดใช้งาน"}
@@ -73,7 +72,7 @@ export default function HomePage() {
       </header>
 
       {/* กลุ่มผู้ใช้เป้าหมาย */}
-      <section className="bg-gray-800 border border-gray-700 p-8 rounded-2xl mb-12 shadow-xl">
+      <section className="bg-gray-900 border border-gray-800 p-8 rounded-2xl mb-12 shadow-lg">
         <h2 className="text-2xl font-semibold text-gray-100 mb-4">กลุ่มผู้ใช้เป้าหมาย</h2>
         <p className="text-gray-300 leading-relaxed max-w-4xl">
           เว็บไซต์นี้เหมาะสำหรับนักศึกษา อาจารย์ และผู้ที่ต้องการตรวจสอบข้อมูลรายวิชาและสถานะการเปิดลงทะเบียน
@@ -87,25 +86,24 @@ export default function HomePage() {
           {COURSES_DATA.map((course) => (
             <article
               key={course.id}
-              // เปลี่ยนสีพื้นหลังการ์ด และเพิ่มเงา
-              className="bg-gray-800 border border-gray-700 rounded-2xl p-7 shadow-lg hover:border-blue-700 hover:shadow-blue-900/30 transition-all duration-300 flex flex-col justify-between space-y-6"
+              className="bg-gray-900 border border-gray-800 rounded-2xl p-7 shadow-lg hover:border-blue-700 hover:shadow-blue-900/20 transition-all duration-300 flex flex-col justify-between space-y-6"
             >
               <div className="flex items-start justify-between gap-4">
-                 <h3 className="text-xl font-bold text-gray-50 leading-tight flex-1">
+                <h3 className="text-xl font-bold text-gray-50 leading-tight flex-1">
                   {course.title}
                 </h3>
-                 <span className="text-xs font-medium px-3 py-1.5 bg-blue-900 text-blue-300 rounded-full whitespace-nowrap">
+                <span className="text-xs font-medium px-3 py-1.5 bg-blue-950 text-blue-300 border border-blue-800 rounded-full whitespace-nowrap">
                   {course.code}
                 </span>
               </div>
 
-              <div className="pt-6 border-t border-gray-700 flex items-center justify-between text-sm">
+              <div className="pt-6 border-t border-gray-800 flex items-center justify-between text-sm">
                 <span className="text-gray-400">{course.credits} หน่วยกิต</span>
                 <span
-                  className={`px-4 py-1.5 rounded-full text-xs font-semibold ${
+                  className={`px-3.5 py-1 rounded-full text-xs font-semibold ${
                     course.isOpen
-                      ? "bg-green-900 text-green-300"
-                      : "bg-red-900 text-red-300"
+                      ? "bg-green-950 text-green-300 border border-green-800"
+                      : "bg-red-950 text-red-300 border border-red-800"
                   }`}
                 >
                   {course.isOpen ? "เปิดลงทะเบียน" : "ปิดลงทะเบียน"}
