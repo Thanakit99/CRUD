@@ -1,33 +1,27 @@
 "use client";
 
 import { useState, ChangeEvent } from "react";
+import type { Course } from "@/types/course";
 import CourseCard from "@/components/CourseCard";
 
-type Course = {
-  id: number;
-  code: string;
-  title: string;
-  credits: number;
-  isOpen: boolean;
-};
-
+// ใช้โครงสร้างให้ตรงกับ type Course ส่วนกลาง (id เป็น string, ใช้ name และ credit)
 const COURSES_DATA: Course[] = [
-  { id: 1, code: "10301231", title: "Web Technology", credits: 3, isOpen: true },
-  { id: 2, code: "10301232", title: "Network", credits: 3, isOpen: true },
-  { id: 3, code: "10301233", title: "Database Systems", credits: 3, isOpen: false },
-  { id: 4, code: "10301234", title: "Structure Relational Database", credits: 3, isOpen: true },
+  { id: "1", code: "10301231", name: "Web Technology", credit: 3, instructor: "อาจารย์ผู้สอน" },
+  { id: "2", code: "10301232", name: "Network", credit: 3, instructor: "อาจารย์ผู้สอน" },
+  { id: "3", code: "10301233", name: "Database Systems", credit: 3, instructor: "อาจารย์ผู้สอน" },
+  { id: "4", code: "10301234", name: "Structure Relational Database", credit: 3, instructor: "อาจารย์ผู้สอน" },
 ];
 
 export default function CoursesPage() {
   const [keyword, setKeyword] = useState("");
-  const [favoriteIds, setFavoriteIds] = useState<number[]>([]);
+  const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
   const [onlyFavorite, setOnlyFavorite] = useState(false);
 
   function handleKeywordChange(e: ChangeEvent<HTMLInputElement>) {
     setKeyword(e.target.value);
   }
 
-  function handleToggleFavorite(id: number) {
+  function handleToggleFavorite(id: string) {
     setFavoriteIds((prev) =>
       prev.includes(id) ? prev.filter((favId) => favId !== id) : [...prev, id]
     );
@@ -36,7 +30,7 @@ export default function CoursesPage() {
   const searchText = keyword.trim().toLowerCase();
   const visibleCourses = COURSES_DATA.filter((course) => {
     const matchesSearch =
-      course.title.toLowerCase().includes(searchText) ||
+      course.name.toLowerCase().includes(searchText) ||
       course.code.toLowerCase().includes(searchText);
     const matchesFavorite = onlyFavorite ? favoriteIds.includes(course.id) : true;
     return matchesSearch && matchesFavorite;
@@ -106,6 +100,8 @@ export default function CoursesPage() {
               course={course}
               isFavorite={favoriteIds.includes(course.id)}
               onToggleFavorite={handleToggleFavorite}
+              onEdit={() => {}}
+              onDelete={() => {}}
             />
           ))}
         </div>

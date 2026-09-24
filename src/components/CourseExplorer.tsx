@@ -2,7 +2,7 @@
 
 import { useState, ChangeEvent } from "react";
 import type { Course } from "@/types/course";
-import CourseCard from "@/components/CourseCard"; // ปรับให้ตรงกับชื่อไฟล์การ์ดจริง
+import CourseCard from "@/components/CourseCard";
 
 type CourseExplorerProps = {
   courses: Course[];
@@ -10,14 +10,14 @@ type CourseExplorerProps = {
 
 export default function CourseExplorer({ courses }: CourseExplorerProps) {
   const [keyword, setKeyword] = useState("");
-  const [favoriteIds, setFavoriteIds] = useState<number[]>([]);
+  const [favoriteIds, setFavoriteIds] = useState<string[]>([]); // ใช้ string[]
   const [onlyFavorite, setOnlyFavorite] = useState(false);
 
   function handleKeywordChange(e: ChangeEvent<HTMLInputElement>) {
     setKeyword(e.target.value);
   }
 
-  function handleToggleFavorite(id: number) {
+  function handleToggleFavorite(id: string) { // รับค่าเป็น string
     setFavoriteIds((prev) =>
       prev.includes(id) ? prev.filter((favId) => favId !== id) : [...prev, id]
     );
@@ -25,7 +25,6 @@ export default function CourseExplorer({ courses }: CourseExplorerProps) {
 
   const searchText = keyword.trim().toLowerCase();
   const visibleCourses = courses.filter((course) => {
-    // ปรับจาก course.title เป็น course.name ตามโครงสร้าง Type ทั่วไป (ถ้าของคุณใช้ title ให้เปลี่ยนกลับได้ครับ)
     const matchesSearch =
       course.name.toLowerCase().includes(searchText) ||
       course.code.includes(searchText);
@@ -63,6 +62,8 @@ export default function CourseExplorer({ courses }: CourseExplorerProps) {
               course={course}
               isFavorite={favoriteIds.includes(course.id)}
               onToggleFavorite={handleToggleFavorite}
+              onEdit={() => {}}
+              onDelete={() => {}}
             />
           ))}
         </section>

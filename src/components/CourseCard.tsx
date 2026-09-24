@@ -4,7 +4,7 @@ import type { Course } from "@/types/course";
 type CourseCardProps = {
   course: Course;
   isFavorite: boolean;
-  onToggleFavorite: (id: number) => void;
+  onToggleFavorite: (id: string) => void;
   onEdit: () => void;
   onDelete: () => void;
 };
@@ -45,7 +45,7 @@ export default function CourseCard({
               href={`/courses/${course.id}`}
               style={{ color: "inherit", textDecoration: "none" }}
             >
-              {course.title ?? course.name}
+              {course.name}
             </Link>
           </h2>
           <span
@@ -62,7 +62,7 @@ export default function CourseCard({
         </div>
 
         <p style={{ color: "#9ca3af", fontSize: "0.95rem", marginBottom: "0.5rem" }}>
-          <strong>หน่วยกิต:</strong> {course.credits ?? course.credit}
+          <strong>หน่วยกิต:</strong> {course.credit}
         </p>
       </div>
 
